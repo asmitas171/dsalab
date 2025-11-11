@@ -85,38 +85,33 @@ int main() {
 #include <iostream>
 using namespace std;
 
-
-int binarySearch(int arr[], int size, int target) {
-    int left = 0;
-    int right = size - 1;
-
-    while (left <= right) {
-        int mid = (left + right) / 2;
-
-        if (arr[mid] == target)
-            return mid;  
-
-        if (arr[mid] < target)
-            left = mid + 1; 
-        else
-            right = mid - 1; 
+int binarysearch(int arr[], int size, int target) {
+    int low = 0;
+    int high = size - 1;
+    while (low <= high) {
+        int mid = low + (high - low) / 2;  // ✅ fixed midpoint
+        if (arr[mid] == target) {
+            return mid;
+        } else if (arr[mid] < target) {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
     }
-
-    return -1;  
+    return -1;
 }
 
-// Main function
 int main() {
-    int sortedArray[] = {2, 5, 8, 12, 16, 23, 38, 56, 72, 91};
-    int size = sizeof(sortedArray) / sizeof(sortedArray[0]);
-    int targetElement = 23;
+    int sortedArray[] = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+    int size = sizeof(sortedArray) / sizeof(sortedArray[0]);  
+    int targetElement = 90;
 
-    int result = binarySearch(sortedArray, size, targetElement);
+    int result = binarysearch(sortedArray, size, targetElement);
 
     if (result != -1) {
         cout << "Element " << targetElement << " found at index: " << result << endl;
     } else {
-        cout << "Element " << targetElement << " not found in the array." << endl;
+        cout << "Element " << targetElement << " not found in the Array" << endl;
     }
 
     return 0;
